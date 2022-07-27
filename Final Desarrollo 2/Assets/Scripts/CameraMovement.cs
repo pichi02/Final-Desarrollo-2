@@ -6,7 +6,7 @@ public class CameraMovement : MonoBehaviour
 {
     [SerializeField] private GameObject player;
     [SerializeField] private Transform camTransform;
-    [SerializeField] private Vector3 offset;
+ 
     private Camera cam;
 
     private float distance = 5;
@@ -35,7 +35,7 @@ public class CameraMovement : MonoBehaviour
     {
         Vector3 dir = new Vector3(0, 0, -distance);
         Quaternion rot = Quaternion.Euler(currentY, currentX, 0);
-        camTransform.position = player.transform.position + offset + rot * dir;
+        camTransform.position = player.transform.position + rot * dir;
         camTransform.LookAt(player.transform.position);
     }
 }
