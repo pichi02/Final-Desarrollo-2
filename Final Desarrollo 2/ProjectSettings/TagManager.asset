@@ -3,12 +3,13 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - "Ca\xF1on"
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - "Ca\xF1on"
   - Water
   - UI
   - 

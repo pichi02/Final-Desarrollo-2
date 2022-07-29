@@ -2,12 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class Movement : MonoBehaviour
 {
     [SerializeField] private float speed;
 
     private GameObject tankBase;
     private GameObject tankBarrel;
+
+    private float timeCount = 0f;
     // Update is called once per frame
     private void Start()
     {
@@ -34,9 +37,9 @@ public class Movement : MonoBehaviour
         }
         else if (Input.GetMouseButton(0))
         {
-            //tankBarrel.transform.rotation = Quaternion.Lerp(tankBarrel.transform.rotation, tankBase.transform.rotation, 5f * 0.001f);
-            float rotationDiff = tankBase.transform.rotation.y - tankBarrel.transform.rotation.y;
-            tankBarrel.transform.RotateAround(tankBase.transform.position, Vector3.up, rotationDiff * 10);
+            Vector3 mousePos = Input.mousePosition;
+         
+        
         }
     }
 }
