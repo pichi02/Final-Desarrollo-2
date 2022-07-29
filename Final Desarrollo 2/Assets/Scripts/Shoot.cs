@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Shoot : MonoBehaviour
 {
-    //[SerializeField] private Transform bulletSpawnPoint;
-    [SerializeField] private GameObject bulletPrefab;
+    [SerializeField] private Transform bulletSpawnPoint;
+    [SerializeField] private Rigidbody bulletPrefab;
     //[SerializeField] private float bulletSpeed = 10;
     [SerializeField] private LayerMask layer;
 
@@ -33,8 +33,19 @@ public class Shoot : MonoBehaviour
         {
             cursor.SetActive(true);
             cursor.transform.position = hit.point + Vector3.up * 0.1f;
-        }
+            Vector3 Vo = CalculateVelocity(hit.point, bulletSpawnPoint.transform.position, 1f);
+            transform.rotation = Quaternion.LookRotation(Vo);
 
+            if (Input.GetMouseButtonDown(0))
+            {
+                Rigidbody obj = Instantiate(bulletPrefab, bulletSpawnPoint.position, Quaternion.identity);
+                obj.velocity = Vo;
+            }
+        }
+        else
+        {
+            cursor.SetActive(false);
+        }
     }
     Vector3 CalculateVelocity(Vector3 target, Vector3 origin, float time)
     {
