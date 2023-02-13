@@ -5,41 +5,17 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
-    [SerializeField] private float speed;
+    public float speed = 10f;
+    public float rotationSpeed = 10f;
 
-    private GameObject tankBase;
-    private GameObject tankBarrel;
 
-    private float timeCount = 0f;
-    // Update is called once per frame
-    private void Start()
+    private void Update()
     {
-        tankBase = transform.GetChild(0).gameObject;
-        tankBarrel = transform.GetChild(1).gameObject;
-    }
-    void Update()
-    {
-        if (Input.GetKey(KeyCode.W))
-        {
-            transform.position += tankBase.transform.forward * speed * Time.deltaTime;
-        }
-        else if (Input.GetKey(KeyCode.S))
-        {
-            transform.position -= tankBase.transform.forward * speed * Time.deltaTime;
-        }
-        else if (Input.GetKey(KeyCode.A))
-        {
-            tankBase.transform.Rotate(new Vector3(0, 20, 0) * Time.deltaTime);
-        }
-        else if (Input.GetKey(KeyCode.D))
-        {
-            tankBase.transform.Rotate(new Vector3(0, -20, 0) * Time.deltaTime);
-        }
-        else if (Input.GetMouseButton(0))
-        {
-            Vector3 mousePos = Input.mousePosition;
-         
-        
-        }
+        float horizontal = Input.GetAxis("Horizontal");
+        float vertical = Input.GetAxis("Vertical");
+
+        transform.position += transform.forward * vertical * speed * Time.deltaTime;
+        transform.rotation *= Quaternion.AngleAxis(rotationSpeed * horizontal * Time.deltaTime, Vector3.up);
     }
 }
+
