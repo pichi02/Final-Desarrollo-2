@@ -28,20 +28,27 @@ public class Shoot : MonoBehaviour
     {
         Ray ray = cam.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
+        float minDistance = 3f;
+        float spawnPointAndCursorDistance = Vector3.Distance(bulletSpawnPoint.position, cursor.transform.position);
 
         if (Physics.Raycast(ray, out hit, 100f, layer))
         {
             cursor.SetActive(true);
             cursor.transform.position = hit.point + Vector3.up * 0.1f;
-            Vector3 Vo = CalculateVelocity(hit.point, bulletSpawnPoint.transform.position, 1f);
-            transform.rotation = Quaternion.LookRotation(Vo);
-
-            if (Input.GetMouseButtonDown(0))
+            if (spawnPointAndCursorDistance > minDistance)
             {
-                Rigidbody obj = Instantiate(bulletPrefab, bulletSpawnPoint.position, Quaternion.identity);
-                obj.velocity = Vo;
+                Vector3 Vo = CalculateVelocity(hit.point, bulletSpawnPoint.transform.position, 1f);
+                transform.rotation = Quaternion.LookRotation(Vo);
+                if (Input.GetMouseButtonDown(0))
+                {
+                    Rigidbody obj = Instantiate(bulletPrefab, bulletSpawnPoint.position, Quaternion.identity);
+                    obj.velocity = Vo;
+                }
             }
+
+
         }
+
         else
         {
             cursor.SetActive(false);
