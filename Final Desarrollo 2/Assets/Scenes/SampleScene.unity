@@ -266,8 +266,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6205674f8e94bcc408a808592760e4db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
-  rotationSpeed: 50
+  speed: 2
+  rotationSpeed: 60
 --- !u!1 &576591935
 GameObject:
   m_ObjectHideFlags: 0
@@ -640,6 +640,7 @@ MonoBehaviour:
   layer:
     serializedVersion: 2
     m_Bits: 1
+  rotationSpeed: 100
   cursor: {fileID: 2081175799}
 --- !u!1 &1703390773
 GameObject:
@@ -816,7 +817,7 @@ Transform:
   m_GameObject: {fileID: 2081175799}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1.1404753, y: 0.01, z: 3.96}
-  m_LocalScale: {x: 1, y: 0.000037926504, z: 1}
+  m_LocalScale: {x: 1.6894, y: 0.000064073036, z: 1.6894}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}

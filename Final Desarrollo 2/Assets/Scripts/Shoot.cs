@@ -1,17 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 public class Shoot : MonoBehaviour
 {
     [SerializeField] private Transform bulletSpawnPoint;
     [SerializeField] private Rigidbody bulletPrefab;
-    //[SerializeField] private float bulletSpeed = 10;
     [SerializeField] private LayerMask layer;
-
+    [SerializeField] private float rotationSpeed = 100f;
 
 
     [SerializeField] private GameObject cursor;
+    private bool aimed = false;
+    private bool aiming = false;
 
     private Camera cam;
 
@@ -29,20 +31,24 @@ public class Shoot : MonoBehaviour
         Ray ray = cam.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
         float minDistance = 3f;
-        float spawnPointAndCursorDistance = Vector3.Distance(bulletSpawnPoint.position, cursor.transform.position);
+        float distance = Vector3.Distance(bulletSpawnPoint.position, cursor.transform.position);
 
         if (Physics.Raycast(ray, out hit, 100f, layer))
         {
             cursor.SetActive(true);
             cursor.transform.position = hit.point + Vector3.up * 0.1f;
-            if (spawnPointAndCursorDistance > minDistance)
+            if (distance > minDistance)
             {
                 Vector3 Vo = CalculateVelocity(hit.point, bulletSpawnPoint.transform.position, 1f);
-                transform.rotation = Quaternion.LookRotation(Vo);
+                Vector3 direction = cursor.transform.position - bulletSpawnPoint.transform.position;
+
                 if (Input.GetMouseButtonDown(0))
                 {
-                    Rigidbody obj = Instantiate(bulletPrefab, bulletSpawnPoint.position, Quaternion.identity);
-                    obj.velocity = Vo;
+                    if (!aiming)
+                    {
+                        StartCoroutine(AimCoroutine(Vo, direction));
+                    }
+
                 }
             }
 
@@ -71,5 +77,33 @@ public class Shoot : MonoBehaviour
         result.y = Vy;
 
         return result;
+    }
+
+    private void Aim(Vector3 targetRot)
+    {
+        Quaternion rotation = Quaternion.LookRotation(targetRot);
+
+        aimed = false;
+        if (Quaternion.Angle(rotation, transform.rotation) < 1f)
+        {
+            aimed = true;
+        }
+
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, rotation, rotationSpeed * Time.deltaTime);
+    }
+
+    private IEnumerator AimCoroutine(Vector3 velocity, Vector3 direction)
+    {
+        aiming = true;
+        while (!aimed)
+        {
+            Aim(direction);
+            yield return null;
+        }
+        Rigidbody obj = Instantiate(bulletPrefab, bulletSpawnPoint.position, Quaternion.identity);
+        obj.velocity = velocity;
+        aimed = false;
+        aiming = false;
+        yield return null;
     }
 }
