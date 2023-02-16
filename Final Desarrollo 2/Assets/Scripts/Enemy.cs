@@ -24,4 +24,12 @@ public class Enemy : MonoBehaviour
             movementStrategy.Move(transform, playerTransform, movementSpeed);
         }
     }
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.transform.CompareTag("Player"))
+        {
+            Debug.Log("murio el jugador");
+        }
+    }
+ 
 }
