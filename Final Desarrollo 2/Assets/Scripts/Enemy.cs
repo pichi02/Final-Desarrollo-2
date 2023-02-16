@@ -24,12 +24,16 @@ public class Enemy : MonoBehaviour
             movementStrategy.Move(transform, playerTransform, movementSpeed);
         }
     }
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider col)
     {
-        if (collision.transform.CompareTag("Player"))
+        if (col.transform.CompareTag("Player"))
         {
             Debug.Log("murio el jugador");
         }
+        else if (col.transform.CompareTag("Bullet"))
+        {
+            Destroy(gameObject);
+        }
     }
- 
+
 }
