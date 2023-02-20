@@ -1,9 +1,8 @@
 using System.Collections;
-using System.Collections.Generic;
+using System.Security.Cryptography;
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
 
-public class Shoot : MonoBehaviour
+public class ShootBehaviour : MonoBehaviour
 {
     [SerializeField] private Transform bulletSpawnPoint;
     [SerializeField] private Rigidbody bulletPrefab;
@@ -15,6 +14,8 @@ public class Shoot : MonoBehaviour
     private bool aimed = false;
     private bool aiming = false;
 
+    private bool canShoot = true;
+
     private Camera cam;
 
     private void Start()
@@ -23,7 +24,10 @@ public class Shoot : MonoBehaviour
     }
     void Update()
     {
-        LaunchProjectile();
+        if (canShoot)
+        {
+            LaunchProjectile();
+        }
     }
 
     void LaunchProjectile()
@@ -105,5 +109,10 @@ public class Shoot : MonoBehaviour
         aimed = false;
         aiming = false;
         yield return null;
+    }
+
+    public void DisableCanShoot()
+    {
+        canShoot = false;
     }
 }
