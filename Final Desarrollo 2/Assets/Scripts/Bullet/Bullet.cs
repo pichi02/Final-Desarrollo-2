@@ -7,7 +7,7 @@ public class Bullet : MonoBehaviour
     {
         Destroy(gameObject, 3f);
     }
-    void OnTriggerEnter(Collider col)
+    void OnCollisionEnter(Collision col)
     {
         if (col.transform.CompareTag("Enemy"))
         {

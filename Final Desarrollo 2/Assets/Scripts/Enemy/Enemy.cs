@@ -10,7 +10,7 @@ public class Enemy : MonoBehaviour
     private IEnemyMovementStrategy movementStrategy;
     private void Awake()
     {
-        movementStrategy = new ChasePlayerEnemyMovement();
+        movementStrategy = new JumpEnemyMovement();
     }
     public void SetMovementStrategy(IEnemyMovementStrategy strategy)
     {
@@ -24,7 +24,7 @@ public class Enemy : MonoBehaviour
             movementStrategy.Move(transform, playerTransform, movementSpeed);
         }
     }
-    private void OnTriggerEnter(Collider col)
+    private void OnCollisionEnter(Collision col)
     {
         if (col.transform.CompareTag("Player"))
         {
