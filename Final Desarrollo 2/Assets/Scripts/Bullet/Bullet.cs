@@ -1,8 +1,10 @@
 using Unity.VisualScripting;
 using UnityEngine;
+using System;
 
 public class Bullet : MonoBehaviour
 {
+    public static Action OnEnemyKill;
     private void Start()
     {
         Destroy(gameObject, 3f);
@@ -11,6 +13,7 @@ public class Bullet : MonoBehaviour
     {
         if (col.transform.CompareTag("Enemy"))
         {
+            OnEnemyKill?.Invoke();
             Destroy(gameObject);
         }
     }

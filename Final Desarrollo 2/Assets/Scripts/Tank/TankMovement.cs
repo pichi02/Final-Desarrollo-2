@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 
@@ -10,6 +9,8 @@ public class TankMovement : MonoBehaviour
     private float horizontal;
     private float vertical;
     private bool canMove = true;
+    private int killedEnemies = 0;
+    public Action<int> OnIncreaseKilledEnemies;
 
 
     private void Update()
@@ -30,6 +31,12 @@ public class TankMovement : MonoBehaviour
     public void DisableCanMove()
     {
         canMove = false;
+    }
+
+    public void IncreaseKilledEnemies()
+    {
+        killedEnemies++;
+        OnIncreaseKilledEnemies?.Invoke(killedEnemies);
     }
 }
 
