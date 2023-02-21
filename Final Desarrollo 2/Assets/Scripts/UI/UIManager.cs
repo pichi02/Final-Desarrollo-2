@@ -7,12 +7,13 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI killedEnemiesText;
     [SerializeField] private Countdown countdown;
     [SerializeField] private GameObject gameOverPanel;
-    [SerializeField] private TankMovement tankMovement;
+    [SerializeField] private Tank tankMovement;
 
     private void Start()
     {
         countdown.OnTimeChange += UpdateTimeText;
         countdown.OnTimeFinish += EnableGameOverPanel;
+        tankMovement.OnWin += EnableGameOverPanel;
         tankMovement.OnIncreaseKilledEnemies += UpdateKilledEnemiesText;
     }
 
@@ -21,6 +22,7 @@ public class UIManager : MonoBehaviour
         countdown.OnTimeChange -= UpdateTimeText;
         countdown.OnTimeFinish -= EnableGameOverPanel;
         tankMovement.OnIncreaseKilledEnemies -= UpdateKilledEnemiesText;
+        tankMovement.OnWin -= EnableGameOverPanel;
     }
     private void UpdateTimeText(float time)
     {
