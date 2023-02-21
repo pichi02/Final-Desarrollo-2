@@ -13,8 +13,9 @@ public class Tank : MonoBehaviour
     private const int enemies = 1;
     public Action<int> OnIncreaseKilledEnemies;
     public Action OnWin;
+    public Action OnNameEditFinish;
     public Action<float, string, int> OnSaveData;
-    [SerializeField] private string name;
+    private string playerName = "";
     private float time = 0f;
 
     private void Update()
@@ -49,8 +50,15 @@ public class Tank : MonoBehaviour
         if (killedEnemies == enemies)
         {
             OnWin?.Invoke();
-            OnSaveData(time, name, killedEnemies);
+            OnSaveData(time, playerName, killedEnemies);
         }
+    }
+
+    public void EditName(string name)
+    {
+        playerName = name;
+        Debug.Log(name);
+        OnNameEditFinish?.Invoke();
     }
 }
 
