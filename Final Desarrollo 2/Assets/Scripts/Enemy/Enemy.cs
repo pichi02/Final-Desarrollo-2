@@ -4,12 +4,14 @@ namespace TankGame
 {
     public class Enemy : MonoBehaviour
     {
-        [SerializeField] private float movementSpeed = 5f;
-        [SerializeField] private Transform playerTransform;
 
+        protected float speed;
+        [SerializeField] private Transform playerTransform;
+        [SerializeField] private EnemyScriptableObject enemyScriptableObject;
         private IEnemyMovementStrategy movementStrategy;
-        private void Awake()
+        private void Start()
         {
+            speed = enemyScriptableObject.Speed;
             int random = Random.Range(0, 2);
             if (random == 0)
                 movementStrategy = new JumpEnemyMovement();
@@ -26,7 +28,7 @@ namespace TankGame
         {
             if (movementStrategy != null)
             {
-                movementStrategy.Move(transform, playerTransform, movementSpeed);
+                movementStrategy.Move(transform, playerTransform, speed);
             }
         }
         private void OnCollisionEnter(Collision col)

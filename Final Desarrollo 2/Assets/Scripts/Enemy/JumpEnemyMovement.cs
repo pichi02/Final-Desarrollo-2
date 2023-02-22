@@ -18,6 +18,7 @@ namespace TankGame
                 enemyTransform.GetComponent<Rigidbody>().velocity = new Vector3(0, -1, 0);
                 enemyTransform.position = Vector3.Lerp(enemyTransform.position, pointB, 1);
             }
+
         }
     }
 }
