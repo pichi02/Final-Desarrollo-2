@@ -1,70 +1,71 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class DataSaver : MonoBehaviour
+namespace TankGame
 {
-    private GameOverData data;
-    private const string pathName = "Data";
-    private const string fileName = "data";
-
-    public void SaveNewData(float lastTime, string newName, int killedEnemies)
+    public class DataSaver : MonoBehaviour
     {
+        private GameOverData data;
+        private const string pathName = "Data";
+        private const string fileName = "data";
 
-        var dataFound = SaveLoadPlayersDataSystem.LoadData<GameOverData>(pathName, fileName);
-        if (dataFound != null)
+        public void SaveNewData(float lastTime, string newName, int killedEnemies)
         {
-            data = dataFound;
-            SetNewData(lastTime, newName, killedEnemies);
-        }
-        else
-        {
-            data = new GameOverData()
+
+            var dataFound = SaveLoadPlayersDataSystem.LoadData<GameOverData>(pathName, fileName);
+            if (dataFound != null)
             {
-                bestPlayerName = newName,
-                secondBestPlayerName = "empty",
-                thirdBestPlayerName = "empty",
-                bestPlayerScore = lastTime,
-                thirdBestPlayerScore = 50,
-                secondBestPlayerScore = 50,
-                lastGameTime = lastTime,
-                lastGameKilledEnemies = killedEnemies,
+                data = dataFound;
+                SetNewData(lastTime, newName, killedEnemies);
+            }
+            else
+            {
+                data = new GameOverData()
+                {
+                    bestPlayerName = newName,
+                    secondBestPlayerName = "empty",
+                    thirdBestPlayerName = "empty",
+                    bestPlayerScore = lastTime,
+                    thirdBestPlayerScore = 50,
+                    secondBestPlayerScore = 50,
+                    lastGameTime = lastTime,
+                    lastGameKilledEnemies = killedEnemies,
 
-            };
+                };
 
+            }
+            SaveData();
         }
-        SaveData();
-    }
-    private void SaveData()
-    {
-        SaveLoadPlayersDataSystem.SaveData(data, pathName, fileName);
-    }
-
-    private void SetNewData(float lastGameTime, string newName, int killedEnemies)
-    {
-        data.lastGameKilledEnemies = killedEnemies;
-        data.lastGameTime = lastGameTime;
-        if (lastGameTime < data.bestPlayerScore)
+        private void SaveData()
         {
-            data.thirdBestPlayerScore = data.secondBestPlayerScore;
-            data.thirdBestPlayerName = data.secondBestPlayerName;
-            data.secondBestPlayerScore = data.bestPlayerScore;
-            data.secondBestPlayerName = data.bestPlayerName;
-            data.bestPlayerScore = lastGameTime;
-            data.bestPlayerName = newName;
-
+            SaveLoadPlayersDataSystem.SaveData(data, pathName, fileName);
         }
-        else if (lastGameTime < data.secondBestPlayerScore)
+
+        private void SetNewData(float lastGameTime, string newName, int killedEnemies)
         {
-            data.thirdBestPlayerScore = data.secondBestPlayerScore;
-            data.thirdBestPlayerName = data.secondBestPlayerName;
-            data.secondBestPlayerScore = lastGameTime;
-            data.secondBestPlayerName = newName;
-        }
-        else if (lastGameTime < data.thirdBestPlayerScore)
-        {
-            data.thirdBestPlayerScore = lastGameTime;
-            data.thirdBestPlayerName = newName;
+            data.lastGameKilledEnemies = killedEnemies;
+            data.lastGameTime = lastGameTime;
+            if (lastGameTime < data.bestPlayerScore)
+            {
+                data.thirdBestPlayerScore = data.secondBestPlayerScore;
+                data.thirdBestPlayerName = data.secondBestPlayerName;
+                data.secondBestPlayerScore = data.bestPlayerScore;
+                data.secondBestPlayerName = data.bestPlayerName;
+                data.bestPlayerScore = lastGameTime;
+                data.bestPlayerName = newName;
+
+            }
+            else if (lastGameTime < data.secondBestPlayerScore)
+            {
+                data.thirdBestPlayerScore = data.secondBestPlayerScore;
+                data.thirdBestPlayerName = data.secondBestPlayerName;
+                data.secondBestPlayerScore = lastGameTime;
+                data.secondBestPlayerName = newName;
+            }
+            else if (lastGameTime < data.thirdBestPlayerScore)
+            {
+                data.thirdBestPlayerScore = lastGameTime;
+                data.thirdBestPlayerName = newName;
+            }
         }
     }
 }

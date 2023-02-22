@@ -1,20 +1,22 @@
-using Unity.VisualScripting;
 using UnityEngine;
 using System;
 
-public class Bullet : MonoBehaviour
+namespace TankGame
 {
-    public static Action OnEnemyKill;
-    private void Start()
+    public class Bullet : MonoBehaviour
     {
-        Destroy(gameObject, 3f);
-    }
-    void OnCollisionEnter(Collision col)
-    {
-        if (col.transform.CompareTag("Enemy"))
+        public static Action OnEnemyKill;
+        private void Start()
         {
-            OnEnemyKill?.Invoke();
-            Destroy(gameObject);
+            Destroy(gameObject, 3f);
+        }
+        void OnCollisionEnter(Collision col)
+        {
+            if (col.transform.CompareTag("Enemy"))
+            {
+                OnEnemyKill?.Invoke();
+                Destroy(gameObject);
+            }
         }
     }
 }
