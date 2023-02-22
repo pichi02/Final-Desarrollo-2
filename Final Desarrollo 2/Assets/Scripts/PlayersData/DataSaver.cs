@@ -21,14 +21,14 @@ public class DataSaver : MonoBehaviour
         {
             data = new GameOverData()
             {
-                bestPlayerName = "empty",
+                bestPlayerName = newName,
                 secondBestPlayerName = "empty",
                 thirdBestPlayerName = "empty",
-                bestPlayerScore = 50,
+                bestPlayerScore = lastTime,
                 thirdBestPlayerScore = 50,
                 secondBestPlayerScore = 50,
-                lastGameTime = 50,
-                lastGameKilledEnemies = 0,
+                lastGameTime = lastTime,
+                lastGameKilledEnemies = killedEnemies,
 
             };
 

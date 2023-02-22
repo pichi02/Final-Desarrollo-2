@@ -10,7 +10,12 @@ public class Enemy : MonoBehaviour
     private IEnemyMovementStrategy movementStrategy;
     private void Awake()
     {
-        movementStrategy = new JumpEnemyMovement();
+        int random = Random.Range(0, 2);
+        if (random == 0)
+            movementStrategy = new JumpEnemyMovement();
+        else
+            movementStrategy = new ChasePlayerEnemyMovement();
+
     }
     public void SetMovementStrategy(IEnemyMovementStrategy strategy)
     {

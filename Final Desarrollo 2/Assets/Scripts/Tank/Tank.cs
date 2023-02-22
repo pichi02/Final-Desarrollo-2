@@ -10,7 +10,7 @@ public class Tank : MonoBehaviour
     private float vertical;
     private bool canMove = true;
     private int killedEnemies = 0;
-    private const int enemies = 1;
+    private const int enemies = 4;
     public Action<int> OnIncreaseKilledEnemies;
     public Action OnWin;
     public Action OnNameEditFinish;

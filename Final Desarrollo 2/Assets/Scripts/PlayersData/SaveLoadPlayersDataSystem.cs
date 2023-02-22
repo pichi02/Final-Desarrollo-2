@@ -23,6 +23,7 @@ public static class SaveLoadPlayersDataSystem
     public static T LoadData<T>(string path, string fileName)
     {
         string fullPath = Application.persistentDataPath + "/" + path + "/" + fileName + ".json";
+        Debug.Log(fullPath);
         if (File.Exists(fullPath))
         {
             string textJson = File.ReadAllText(fullPath);
