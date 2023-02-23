@@ -1,21 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.VFX;
 
 namespace TankGame
 {
     public class AudioSourcesManager : MonoBehaviour
     {
-        // Start is called before the first frame update
-        void Start()
+        [SerializeField] private List<AudioSource> sources;
+        private void Start()
         {
-
+            SetSourcesVolume(PlayerPrefs.GetFloat("volume", 1f));
+        }
+        public void SetSourcesVolume(float volume)
+        {
+            for (int i = 0; i < sources.Count; i++)
+            {
+                sources[i].volume = volume;
+            }
         }
 
-        // Update is called once per frame
-        void Update()
-        {
-
-        }
     }
 }
