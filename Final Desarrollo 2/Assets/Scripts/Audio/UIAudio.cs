@@ -1,11 +1,15 @@
 using UnityEngine;
 using UnityEngine.UI;
+using System;
 namespace TankGame
 {
     public class UIAudio : MonoBehaviour
     {
+        public Action OnEnableMuteToggle;
+        public Action OnDisableMuteToggle;
         bool isMuted;
         Toggle mute;
+
 
         private void Awake()
         {
@@ -20,11 +24,13 @@ namespace TankGame
         {
             if (mute.isOn)
             {
+                OnEnableMuteToggle.Invoke();
                 isMuted = true;
                 Debug.Log(isMuted);
             }
             else
             {
+                OnDisableMuteToggle.Invoke();
                 isMuted = false;
                 Debug.Log(isMuted);
             }
