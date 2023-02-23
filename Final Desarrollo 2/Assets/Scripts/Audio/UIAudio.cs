@@ -5,34 +5,29 @@ namespace TankGame
 {
     public class UIAudio : MonoBehaviour
     {
-        public Action OnEnableMuteToggle;
-        public Action OnDisableMuteToggle;
+        public Action<float> OnChangeMuteToggle;
         bool isMuted;
-        Toggle mute;
-
-
-        private void Awake()
-        {
-            mute = GetComponent<Toggle>();
-        }
+        [SerializeField] Toggle mute;
         private void Start()
         {
-            isMuted = false;
+            float volume = PlayerPrefs.GetFloat("volume");
+            mute.isOn = volume == 0;
+
         }
 
         public void SetIsMuted()
         {
             if (mute.isOn)
             {
-                OnEnableMuteToggle.Invoke();
                 isMuted = true;
                 Debug.Log(isMuted);
+                OnChangeMuteToggle.Invoke(0f);
             }
             else
             {
-                OnDisableMuteToggle.Invoke();
                 isMuted = false;
                 Debug.Log(isMuted);
+                OnChangeMuteToggle.Invoke(1f);
             }
         }
         public bool GetIsMuted()
