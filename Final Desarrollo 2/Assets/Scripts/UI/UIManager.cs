@@ -17,6 +17,7 @@ namespace TankGame
 
         private void Start()
         {
+            tank.OnWin += DisableGameplayUI;
             Enemy.OnTankKill += EnableGameOverPanel;
             Enemy.OnTankKill += DisableGameplayUI;
             Enemy.OnTankKill += tank.DisableCanMove;
@@ -31,6 +32,7 @@ namespace TankGame
 
         private void OnDestroy()
         {
+            tank.OnWin -= DisableGameplayUI;
             Enemy.OnTankKill -= EnableGameOverPanel;
             Enemy.OnTankKill -= DisableGameplayUI;
             Enemy.OnTankKill -= tank.DisableCanMove;

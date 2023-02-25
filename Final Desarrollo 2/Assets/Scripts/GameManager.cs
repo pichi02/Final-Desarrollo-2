@@ -11,6 +11,9 @@ namespace TankGame
         [SerializeField] private Pauser pauser;
         private void Start()
         {
+            tank.OnWin += countdown.DisableCanUpdateTime;
+            tank.OnWin += shootBehaviour.DisableCanShoot;
+            Enemy.OnTankKill += shootBehaviour.DisableCanShoot;
             tank.OnSaveData += dataSaver.SaveNewData;
             countdown.OnTimeFinish += tank.DisableCanMove;
             countdown.OnTimeFinish += shootBehaviour.DisableCanShoot;
@@ -19,6 +22,9 @@ namespace TankGame
         }
         private void OnDestroy()
         {
+            tank.OnWin -= countdown.DisableCanUpdateTime;
+            tank.OnWin -= shootBehaviour.DisableCanShoot;
+            Enemy.OnTankKill -= shootBehaviour.DisableCanShoot;
             tank.OnSaveData -= dataSaver.SaveNewData;
             countdown.OnTimeFinish -= tank.DisableCanMove;
             countdown.OnTimeFinish -= shootBehaviour.DisableCanShoot;

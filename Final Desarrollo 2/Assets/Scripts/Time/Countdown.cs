@@ -8,14 +8,23 @@ namespace TankGame
         [SerializeField] private float time;
         public Action<float> OnTimeChange;
         public Action OnTimeFinish;
+
+        private bool canUpdateTime = true;
         void Update()
         {
-            OnTimeChange?.Invoke(time);
-            if (time > 0.0f)
-                time -= Time.deltaTime;
-            else
-                OnTimeFinish?.Invoke();
+            if (canUpdateTime)
+            {
+                OnTimeChange?.Invoke(time);
+                if (time > 0.0f)
+                    time -= Time.deltaTime;
+                else
+                    OnTimeFinish?.Invoke();
+            }
 
+        }
+        public void DisableCanUpdateTime()
+        {
+            canUpdateTime = false;
         }
     }
 }
