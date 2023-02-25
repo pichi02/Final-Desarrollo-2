@@ -13,12 +13,16 @@ namespace TankGame
         [SerializeField] private Tank tank;
         [SerializeField] private Pauser pauser;
         [SerializeField] private Button pauseButton;
+        [SerializeField] private GameObject winPanel;
 
         private void Start()
         {
+            Enemy.OnTankKill += EnableGameOverPanel;
+            Enemy.OnTankKill += DisableGameplayUI;
+            Enemy.OnTankKill += tank.DisableCanMove;
             countdown.OnTimeChange += UpdateTimeText;
             countdown.OnTimeFinish += EnableGameOverPanel;
-            tank.OnWin += EnableGameOverPanel;
+            tank.OnWin += EnableWinPanel;
             tank.OnIncreaseKilledEnemies += UpdateKilledEnemiesText;
             tank.OnNameEditFinish += EnableGameplayUI;
             pauser.OnResume += EnableGameplayUI;
@@ -27,10 +31,13 @@ namespace TankGame
 
         private void OnDestroy()
         {
+            Enemy.OnTankKill -= EnableGameOverPanel;
+            Enemy.OnTankKill -= DisableGameplayUI;
+            Enemy.OnTankKill -= tank.DisableCanMove;
             countdown.OnTimeChange -= UpdateTimeText;
             countdown.OnTimeFinish -= EnableGameOverPanel;
             tank.OnIncreaseKilledEnemies -= UpdateKilledEnemiesText;
-            tank.OnWin -= EnableGameOverPanel;
+            tank.OnWin -= EnableWinPanel;
             tank.OnNameEditFinish -= EnableGameplayUI;
             pauser.OnResume -= EnableGameplayUI;
             pauser.OnPause -= DisableGameplayUI;
@@ -47,6 +54,10 @@ namespace TankGame
         private void EnableGameOverPanel()
         {
             gameOverPanel.SetActive(true);
+        }
+        private void EnableWinPanel()
+        {
+            winPanel.SetActive(true);
         }
         private void EnableGameplayUI()
         {

@@ -10,24 +10,28 @@ namespace TankGame
         [SerializeField] Toggle mute;
         private void Start()
         {
-            float volume = PlayerPrefs.GetFloat("volume");
-            mute.isOn = volume == 0;
-
+            float volume = PlayerPrefs.GetFloat("volume", 1f);
+            if (volume == 0)
+            {
+                mute.isOn = true;
+            }
+            else
+            {
+                mute.isOn = false;
+            }
         }
 
         public void SetIsMuted()
         {
             if (mute.isOn)
             {
-                isMuted = true;
-                Debug.Log(isMuted);
                 OnChangeMuteToggle.Invoke(0f);
+                isMuted = true;
             }
             else
             {
-                isMuted = false;
-                Debug.Log(isMuted);
                 OnChangeMuteToggle.Invoke(1f);
+                isMuted = false;
             }
         }
         public bool GetIsMuted()

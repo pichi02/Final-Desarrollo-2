@@ -1,24 +1,19 @@
 
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 
 namespace TankGame
 {
     public class JumpEnemyMovement : IEnemyMovementStrategy
     {
-        public void Move(Transform enemyTransform, Transform playerTransform, float speed)
+
+
+        public void Move(Transform enemyTransform, Transform playerTransform, float speed, Vector3 firtPos)
         {
-
-            Vector3 pointB = new Vector3(enemyTransform.position.x, enemyTransform.position.y + 5f, enemyTransform.position.z);
-            RaycastHit hit;
-            float raycastDistance = 1.1f;
-            Debug.DrawRay(enemyTransform.position, Vector3.down);
-            if (Physics.Raycast(enemyTransform.position, Vector3.down, out hit, raycastDistance))
-            {
-                enemyTransform.GetComponent<Rigidbody>().velocity = new Vector3(0, -1, 0);
-                enemyTransform.position = Vector3.Lerp(enemyTransform.position, pointB, 1);
-            }
-
+            Vector3 pointB = new Vector3(firtPos.x, firtPos.y + 5f, firtPos.z);
+            enemyTransform.position = Vector3.Lerp(firtPos, pointB, Mathf.PingPong(Time.time, 1));
         }
+
     }
 }
