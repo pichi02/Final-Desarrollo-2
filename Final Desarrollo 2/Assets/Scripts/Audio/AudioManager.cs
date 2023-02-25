@@ -9,6 +9,7 @@ namespace TankGame
         private UIAudio uiAudio;
         private AudioPlayerPrefs playerPrefs;
         private AudioSourcesManager sourcesManager;
+        [SerializeField] private AudioSource buttonSfx;
         private void Awake()
         {
             uiAudio = GetComponent<UIAudio>();
@@ -17,11 +18,15 @@ namespace TankGame
             uiAudio.OnChangeMuteToggle += playerPrefs.SetAudioSettings;
             playerPrefs.OnSetAudioSettings += sourcesManager.SetSourcesVolume;
         }
-     
+
         private void OnDestroy()
         {
             uiAudio.OnChangeMuteToggle -= playerPrefs.SetAudioSettings;
             playerPrefs.OnSetAudioSettings -= sourcesManager.SetSourcesVolume;
+        }
+        public void PLayButtonSfx()
+        {
+            buttonSfx.Play();
         }
     }
 }
