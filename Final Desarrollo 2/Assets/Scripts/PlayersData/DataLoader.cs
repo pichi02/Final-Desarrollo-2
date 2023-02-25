@@ -8,9 +8,6 @@ namespace TankGame
         [SerializeField] private TextMeshProUGUI bestPlayerName;
         [SerializeField] private TextMeshProUGUI secondBestPlayerName;
         [SerializeField] private TextMeshProUGUI thirdBestPlayerName;
-        [SerializeField] private TextMeshProUGUI bestPlayerScore;
-        [SerializeField] private TextMeshProUGUI secondBestPlayerScore;
-        [SerializeField] private TextMeshProUGUI thirdBestPlayerScore;
         [SerializeField] private TextMeshProUGUI lastGameTime;
         [SerializeField] private TextMeshProUGUI lastGameKilledEnemies;
 
@@ -27,12 +24,9 @@ namespace TankGame
 
         private void GiveDataToUI()
         {
-            bestPlayerName.text = "1." + data.bestPlayerName;
-            secondBestPlayerName.text = "2." + data.secondBestPlayerName;
-            thirdBestPlayerName.text = "3." + data.thirdBestPlayerName;
-            bestPlayerScore.text = data.bestPlayerScore.ToString();
-            secondBestPlayerScore.text = data.secondBestPlayerScore.ToString();
-            thirdBestPlayerScore.text = data.thirdBestPlayerScore.ToString();
+            bestPlayerName.text = "1. " + data.bestPlayerName + ":  " + data.bestPlayerScore + " seconds";
+            secondBestPlayerName.text = "2. " + data.secondBestPlayerName + ":  " + data.secondBestPlayerScore + " seconds";
+            thirdBestPlayerName.text = "3. " + data.thirdBestPlayerName + ":  " + data.thirdBestPlayerScore + " seconds";
             lastGameTime.text = "Time: " + data.lastGameTime.ToString();
             lastGameKilledEnemies.text = "Killed enemies: " + data.lastGameKilledEnemies.ToString();
         }
