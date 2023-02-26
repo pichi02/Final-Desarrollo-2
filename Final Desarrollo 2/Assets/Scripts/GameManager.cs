@@ -1,5 +1,4 @@
 using UnityEngine;
-
 namespace TankGame
 {
     public class GameManager : MonoBehaviour
