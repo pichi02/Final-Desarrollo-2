@@ -10,7 +10,7 @@ namespace TankGame
         [SerializeField] private Rigidbody bulletPrefab;
         [SerializeField] private LayerMask layer;
         [SerializeField] private float rotationSpeed = 100f;
-
+        [SerializeField] private AudioSource shootSfx;
 
         [SerializeField] private GameObject cursor;
         private bool aimed = false;
@@ -108,6 +108,7 @@ namespace TankGame
             }
             Rigidbody obj = Instantiate(bulletPrefab, bulletSpawnPoint.position, Quaternion.identity);
             obj.velocity = velocity;
+            shootSfx.Play();
             aimed = false;
             aiming = false;
             yield return null;
