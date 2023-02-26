@@ -7,10 +7,11 @@ namespace TankGame
     public class ShootBehaviour : MonoBehaviour
     {
         [SerializeField] private Transform bulletSpawnPoint;
-        [SerializeField] private Rigidbody bulletPrefab;
+        [SerializeField] private Rigidbody bullet;
         [SerializeField] private LayerMask layer;
         [SerializeField] private float rotationSpeed = 100f;
         [SerializeField] private AudioSource shootSfx;
+        [SerializeField] private ParticleSystem fire;
 
         [SerializeField] private GameObject cursor;
         private bool aimed = false;
@@ -106,9 +107,10 @@ namespace TankGame
                 Aim(direction);
                 yield return null;
             }
-            Rigidbody obj = Instantiate(bulletPrefab, bulletSpawnPoint.position, Quaternion.identity);
+            Rigidbody obj = Instantiate(bullet, bulletSpawnPoint.position, Quaternion.identity);
             obj.velocity = velocity;
             shootSfx.Play();
+            fire.Play();
             aimed = false;
             aiming = false;
             yield return null;

@@ -5,6 +5,7 @@ namespace TankGame
 {
     public class Bullet : MonoBehaviour
     {
+        [SerializeField] private ParticleSystem explosionParticle;
         public static Action OnEnemyKill;
         private void Start()
         {
@@ -14,6 +15,8 @@ namespace TankGame
         {
             if (col.transform.CompareTag("Enemy"))
             {
+                ParticleSystem explosion = Instantiate(explosionParticle, transform.position, Quaternion.identity);
+                explosion.Play();
                 OnEnemyKill?.Invoke();
                 Destroy(gameObject);
             }
