@@ -50,7 +50,7 @@ namespace TankGame
         }
         private void UpdateKilledEnemiesText(int killedEnemies)
         {
-            killedEnemiesText.text = killedEnemies.ToString();
+            killedEnemiesText.text = "Killed enemies: " + killedEnemies.ToString();
         }
 
         private void EnableGameOverPanel()
