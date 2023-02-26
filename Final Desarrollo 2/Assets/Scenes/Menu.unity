@@ -140,7 +140,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &65274758
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1989,8 +1989,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "Music by:\nZander Noriega (https://opengameart.org/content/darker-waves)\nrezoner
     (https://opengameart.org/content/trance-menu)\n\nSfx by:\nKutejnikov (https://opengameart.org/content/explosion-8)\nfarfadet46
-    (https://opengameart.org/content/laser-fire-0)\nleohpaz (https://opengameart.org/content/10-retro-rpg-menu-sounds)\n\nProgramming
-    by:\n Lucas Pich"
+    (https://opengameart.org/content/laser-fire-0)\nleohpaz (https://opengameart.org/content/10-retro-rpg-menu-sounds)\n\nSkybox
+    by:\nhttps://www.solarsystemscope.com/textures/\n\nProgramming by:\n Lucas Pich"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
