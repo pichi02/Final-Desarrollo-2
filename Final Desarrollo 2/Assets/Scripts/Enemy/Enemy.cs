@@ -8,6 +8,7 @@ namespace TankGame
         protected float speed;
         [SerializeField] private Transform playerTransform;
         [SerializeField] private EnemyScriptableObject enemyScriptableObject;
+        [SerializeField] private AudioSource explosionSfx;
         private IEnemyMovementStrategy movementStrategy;
         Vector3 firstPos;
         public static System.Action OnTankKill;
@@ -45,6 +46,7 @@ namespace TankGame
             }
             else if (col.transform.CompareTag("Bullet"))
             {
+                explosionSfx.Play();
                 Destroy(gameObject);
             }
         }
