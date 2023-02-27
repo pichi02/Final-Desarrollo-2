@@ -23,11 +23,6 @@ namespace TankGame
             else
                 movementStrategy = new ChasePlayerEnemyMovement();
 
-
-        }
-        public void SetMovementStrategy(IEnemyMovementStrategy strategy)
-        {
-            movementStrategy = strategy;
         }
 
         private void Update()

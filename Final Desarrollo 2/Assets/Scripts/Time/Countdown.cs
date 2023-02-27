@@ -9,6 +9,8 @@ namespace TankGame
         public Action<float> OnTimeChange;
         public Action OnTimeFinish;
 
+
+
         private bool canUpdateTime = true;
         void Update()
         {
@@ -19,6 +21,7 @@ namespace TankGame
                     time -= Time.deltaTime;
                 else
                     OnTimeFinish?.Invoke();
+               
             }
 
         }

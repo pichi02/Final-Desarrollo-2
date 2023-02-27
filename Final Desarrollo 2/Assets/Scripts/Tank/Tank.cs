@@ -61,6 +61,14 @@ namespace TankGame
             Debug.Log(name);
             OnNameEditFinish?.Invoke();
         }
+
+        public void SaveData()
+        {
+            OnSaveData(time, playerName, killedEnemies);
+
+        }
+
+
     }
 
 }
