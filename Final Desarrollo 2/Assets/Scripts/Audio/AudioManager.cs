@@ -12,10 +12,12 @@ namespace TankGame
         [SerializeField] private AudioSource buttonSfx;
         private void Awake()
         {
+
             uiAudio = GetComponent<UIAudio>();
             playerPrefs = GetComponent<AudioPlayerPrefs>();
             sourcesManager = GetComponent<AudioSourcesManager>();
             uiAudio.OnChangeMuteToggle += playerPrefs.SetAudioSettings;
+            playerPrefs.OnReturnAudioSettings += uiAudio.SetVolume;
             playerPrefs.OnSetAudioSettings += sourcesManager.SetSourcesVolume;
         }
 

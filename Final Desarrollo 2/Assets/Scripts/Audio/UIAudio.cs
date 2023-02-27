@@ -7,10 +7,11 @@ namespace TankGame
     {
         public Action<float> OnChangeMuteToggle;
         bool isMuted;
+        float volume;
         [SerializeField] Toggle mute;
         private void Start()
         {
-            float volume = PlayerPrefs.GetFloat("volume", 1f);
+
             if (volume == 0)
             {
                 mute.isOn = true;
@@ -38,6 +39,12 @@ namespace TankGame
         {
             return isMuted;
         }
+        public void SetVolume(float volume)
+        {
+            this.volume = volume;
+        }
+
+
 
     }
 }
