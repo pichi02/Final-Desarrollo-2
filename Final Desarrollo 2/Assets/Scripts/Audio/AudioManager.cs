@@ -19,12 +19,15 @@ namespace TankGame
             uiAudio.OnChangeMuteToggle += playerPrefs.SetAudioSettings;
             playerPrefs.OnReturnAudioSettings += uiAudio.SetVolume;
             playerPrefs.OnSetAudioSettings += sourcesManager.SetSourcesVolume;
+            playerPrefs.OnReturnAudioSettings += sourcesManager.SetSourcesVolume;
         }
 
         private void OnDestroy()
         {
             uiAudio.OnChangeMuteToggle -= playerPrefs.SetAudioSettings;
             playerPrefs.OnSetAudioSettings -= sourcesManager.SetSourcesVolume;
+            playerPrefs.OnReturnAudioSettings -= uiAudio.SetVolume;
+            playerPrefs.OnReturnAudioSettings -= sourcesManager.SetSourcesVolume;
         }
         public void PLayButtonSfx()
         {
